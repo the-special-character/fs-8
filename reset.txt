@@ -1,8 +1,0 @@
-reset example
-
-changed reset file
-
-
-reset file
-
-asdfadsf
