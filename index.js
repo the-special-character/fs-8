@@ -1,3 +1,9 @@
+const a = 1;
 
+console.log(a);
 
-            const a = 1
+function test() {
+  console.log('hello');
+}
+
+console.log(test());
