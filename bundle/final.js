@@ -15,7 +15,7 @@
   \******************/
 /***/ (() => {
 
-eval("function _readOnlyError(name) { throw new TypeError(\"\\\"\" + name + \"\\\" is read-only\"); }\nvar a = 1;\n5, _readOnlyError(\"a\");\nconsole.log(a);\n\n// var sum = require(\"./app\");\n\n// console.log(sum(a, b));\n\n// class Animal {\n//   constructor(name) {\n//     this.name = name;\n//   }\n\n//   getName() {\n//     return this.name;\n//   }\n// }\n\n// const animal = new Animal(\"Scorpy\");\n\n// console.log(animal.getName());\n\n//# sourceURL=webpack://fs-8/./index.js?");
+eval("var a = x > 10 ? 'big' : 'small';\n// is equivalent to:\n// let a = x > 10 ? 'big' : 'small'\n\nconsole.log(a);\nvar str = 'kjasdkjf lkahsdlkfjhasf lkjsdlfkjasdf l,kjsdlfkjasdf lskjdfd lsjadlfkjasf lkajskjldas';\nconsole.log(str);\n\n//# sourceURL=webpack://fs-8/./index.js?");
 
 /***/ })
 

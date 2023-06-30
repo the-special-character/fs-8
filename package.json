@@ -29,6 +29,7 @@
     "@babel/core": "^7.22.5",
     "@babel/eslint-parser": "^7.22.5",
     "@babel/eslint-plugin": "^7.22.5",
+    "@babel/plugin-proposal-do-expressions": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
     "babel-loader": "^9.1.2",
     "eslint": "^8.43.0",

@@ -16,5 +16,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', '@babel'],
-  rules: {},
+  rules: {
+    // 'prefer-const': 0,
+  },
 }
