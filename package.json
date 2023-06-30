@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack --mode=development",
+    "build": "webpack",
+    "start": "webpack serve",
     "prettier": "prettier --write .",
     "eslint": "eslint --fix ."
   },
@@ -41,9 +42,11 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "html-webpack-plugin": "^5.5.3",
     "prettier": "2.8.8",
     "webpack": "^5.88.1",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   },
   "lint-staged": {
     "*.{js,jsx}": [

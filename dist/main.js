@@ -9,13 +9,13 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./index.js":
-/*!******************!*\
-  !*** ./index.js ***!
-  \******************/
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
 /***/ (() => {
 
-eval("var a = x > 10 ? 'big' : 'small';\n// is equivalent to:\n// let a = x > 10 ? 'big' : 'small'\n\nconsole.log(a);\nvar str = 'kjasdkjf lkahsdlkfjhasf lkjsdlfkjasdf l,kjsdlfkjasdf lskjdfd lsjadlfkjasf lkajskjldas';\nconsole.log(str);\n\n//# sourceURL=webpack://fs-8/./index.js?");
+eval("var a = 1;\nconsole.log(a);\nfunction test() {\n  console.log('hello');\n}\nconsole.log(test());\n\n//# sourceURL=webpack://fs-8/./src/index.js?");
 
 /***/ })
 
@@ -26,7 +26,7 @@ eval("var a = x > 10 ? 'big' : 'small';\n// is equivalent to:\n// let a = x > 10
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./index.js"]();
+/******/ 	__webpack_modules__["./src/index.js"]();
 /******/ 	
 /******/ })()
 ;
