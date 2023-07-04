@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.abc {
+    color: red
+}
+
+.pqr {
+    color: red;
+    font-size: 24px;
+}

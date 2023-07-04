@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack')
 const path = require('path');
 
 module.exports = {
@@ -7,7 +8,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
-  mode: "production",
+  mode: 'production',
   module: {
     rules: [
       {
@@ -15,10 +16,22 @@ module.exports = {
         exclude: /node_modules/,
         use: 'babel-loader',
       },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+        ],
+      },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({
-    template: './public/index.html',
-    filename: "index.html"
-  })],
+  plugins: [
+    new Dotenv(),
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      filename: 'index.html',
+    }),
+  ],
 };

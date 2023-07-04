@@ -34,7 +34,11 @@
     "@babel/eslint-plugin": "^7.22.5",
     "@babel/plugin-proposal-do-expressions": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
+    "autoprefixer": "^10.4.14",
     "babel-loader": "^9.1.2",
+    "css-loader": "^6.8.1",
+    "dotenv": "^16.3.1",
+    "dotenv-webpack": "^8.0.1",
     "eslint": "^8.43.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.8.0",
@@ -43,7 +47,13 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.3",
+    "postcss": "^8.4.24",
+    "postcss-loader": "^7.3.3",
     "prettier": "2.8.8",
+    "sass": "^1.63.6",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "tailwindcss": "^3.3.2",
     "webpack": "^5.88.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
@@ -53,5 +63,10 @@
       "prettier --write",
       "eslint --fix"
     ]
-  }
+  },
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "not dead"
+  ]
 }

@@ -1,9 +1,8 @@
-const a = 1;
+import './style.css';
 
-console.log(a);
+console.log(process.env.MY_NAME);
 
-function test() {
-  console.log('hello');
-}
+// DOM Manipulation
 
-console.log(test());
+//  
+
