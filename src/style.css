@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 header {
   display: flex;
 
@@ -10,22 +9,18 @@ header {
     color: blue;
 
     &.redLogo {
-        color: red;
+      color: red;
     }
-
   }
 
   & > nav {
     background-color: bisque;
 
     & > ul {
-        display: flex;
-        margin: 0;
-        padding: 0;
-        gap: 1rem;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      gap: 1rem;
     }
   }
 }
-
-
-

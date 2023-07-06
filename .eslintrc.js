@@ -17,7 +17,7 @@ module.exports = {
   },
   plugins: ['react', '@babel'],
   rules: {
-    "import/no-extraneous-dependencies": 0
+    'import/no-extraneous-dependencies': 0,
     // 'prefer-const': 0,
   },
 };
