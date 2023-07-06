@@ -3,12 +3,29 @@
 @tailwind utilities;
 
 
+header {
+  display: flex;
 
-.abc {
-    color: red
+  & > .logo {
+    color: blue;
+
+    &.redLogo {
+        color: red;
+    }
+
+  }
+
+  & > nav {
+    background-color: bisque;
+
+    & > ul {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        gap: 1rem;
+    }
+  }
 }
 
-.pqr {
-    color: red;
-    font-size: 24px;
-}
+
+
