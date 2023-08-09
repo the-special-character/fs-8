@@ -1,26 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-header {
-  display: flex;
+@layer base {
 
-  & > .logo {
-    color: blue;
-
-    &.redLogo {
-      color: red;
-    }
+  h1 {
+    @apply font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl;
   }
 
-  & > nav {
-    background-color: bisque;
+  h2 {
 
-    & > ul {
-      display: flex;
-      margin: 0;
-      padding: 0;
-      gap: 1rem;
-    }
   }
+
+  h3 {
+
+  }
+
+  h4 {
+
+  }
+
+  h5 {
+
+  }
+
+  h6 {
+
+  }
+
+  p.subtitle {
+
+  }
+
+  p.subtitle1 {
+
+  }
+
+  a {
+
+  }
+
+  button,
+  a.btn {
+
+  }
+
+
+}
+
+
+@layer components {
+  .btn {
+
+  }
+}
+
+@layer utilities {
+
 }

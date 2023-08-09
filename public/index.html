@@ -11,18 +11,33 @@
   </head>
   <body>
     <header>
-      <a href="#" class="logo">Logo</a>
-      <nav>
-        <ul>
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-        </ul>
-      </nav>
+      <h1>Todo App</h1>
     </header>
+    <main>
+        <form>
+          <div>
+            <label for="todoText">Todo Text</label>
+            <input type="text" id="todoText" required>
+          </div>
+          <button type="submit">Add Todo</button>
+        </form>
+        <section id="todoList">
+          <div>
+            <div>
+              <label for="isCompletedTodo">Is Completed</label>
+              <input type="checkbox" name="isCompletedTodo" id="isCompletedTodo">
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur.</p>
+            <button type="button">Delete</button>
+          </div>
+        </section>
 
-    <header>
-      <a href="#" class="logo redLogo">Red logo</a>
-    </header>
+    </main>
+
+    <footer>
+      <button type="button">All</button>
+      <button type="button">Pending</button>
+      <button type="button">Completed</button>
+    </footer>
   </body>
 </html>
