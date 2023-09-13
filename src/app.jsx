@@ -1,98 +1,114 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+// import shallowCompare from 'react-addons-shallow-compare';
 
 // Mounting
 
 // -> constructor
 // -> getDerivedStateFromProps
 // -> render
+// -> componentDidMount
 
 // Updating
+// -> getDerivedStateFromProps
+// -> shouldComponentUpdate
+// -> render
+// -> getSnapshotBeforeUpdate
+// -> componentDidUpdate
+
 
 // unMounting
+// 
 
 // Error
 
-export default class App extends Component {
-  state = {
-    count: 0,
-    data: null
+
+export default class App extends PureComponent {
+
+  // derive state from props;
+  // bnd methods
+  // analytics
+  // call only once while init
+  constructor(props) {
+    super(props);
+    this.state = {
+      greet: `Mr. ${props.name}`,
+      count:  0,
+      listData: []
+    }
+    this.changeGreet = this.changeGreet.bind(this)
+    this.controller = new AbortController();
+    this.signal = this.controller.signal;
   }
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     greet: `Mr. ${props.name}`,
-  //     count: 0,
-  //   };
-
-  //   // api
-
-  //   // analytics
-  //   // this.increment = this.increment.bind(this);
-  //   // this.decrement = this.decrement.bind(this)
-  // }
-
-  // this will call whenever props or state value change
-  static getDerivedStateFromProps(props, state) {
-    console.log("getDerivedStateFromProps");
-    
+  static getDerivedStateFromProps(props) {
     return {
       greet: `Mr. ${props.name}`,
     }
   }
 
-  // call only once
-  async componentDidMount() { 
-    console.log(document.getElementById("heading"));
-    document.addEventListener("copy", () => {
-      console.log("Coppied");
-    })
-    try {
-      const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-      const json = await res.json();
-      console.log(json);
-      this.setState({data: json})
-    } catch (error) {
-      
-    }
-
-   }
-
-  increment = () => {
-    this.setState(({ count }) => ({ count: count + 1 }));
+  mouseMove = () => {
+    console.log("mouse move");
   }
 
-  decrement = () => {
-    this.setState(({ count }) => ({ count: count - 1 }));
-  };
+  // dom manipulation
+  // event register
+  // on page load data load
+  // call only once
+  async componentDidMount() { 
+    document.addEventListener("mousemove", this.mouseMove)
+    this.interval = setInterval(() => { 
+      console.log("interval");
+     }, 1000)
+     try {
+      const res = await fetch("https://fakestoreapi.com/products", {
+        signal: this.signal
+      })
+     } catch (error) {
+      
+     }
+   }
+
+  //  shouldComponentUpdate(nextProps, nextState) { 
+  //   return shallowCompare(this,nextProps, nextState);
+  //  }
+
+  changeGreet() {
+    this.setState({greet: 'Mr. Virat'})
+  }
+
+
+
+  getSnapshotBeforeUpdate = (prevProps, prevState) => {
+    return 10;
+  }
+
+
+  // dom manipulation
+  componentDidUpdate(prevProps, prevState, snapshot) { 
+    console.log(snapshot);
+
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousemove", this.mouseMove);
+    clearInterval(this.interval)
+    if(this.controller) {
+      this.controller.abort();
+    }
+   }
 
   render() {
-    console.log("render");
-    const { count, greet, data } = this.state;
-    // const { name } = this.props;
-    // if(count > 3) {
-    //   throw Error("something went wrong...")
-    // }
+    console.log("Render app");
+    const { greet, count } = this.state
     return (
       <div>
-        {count < 5 && <h1 id='heading'>{greet}</h1>}
-        {data && <h2>{data.title}</h2>}
-        <button type="button" onClick={this.increment}>
-          +
-        </button>
-        {count}
-        <button type="button" onClick={this.decrement}>
-          -
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            this.setState({ greet: 'Mrs. Hello' });
-          }}
-        >
-          Change Greet
-        </button>
+        <h1>{greet}</h1>
+        <h2>{count}</h2>
+        <button type='button' onClick={this.changeGreet}>Chnage greet message</button>
+        <button type='button' onClick={() => {
+          this.setState(({ count }) => ({ count: count + 1}))
+        }}>Change Count</button>
       </div>
-    );
+    )
   }
 }
