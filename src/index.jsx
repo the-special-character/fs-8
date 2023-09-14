@@ -16,15 +16,26 @@ const root = createRoot(container);
 class Test extends Component {
   state = {
     name: 'yagnesh',
-    count: 0
+    count: 0,
   };
+
+  static getDerivedStateFromError(error) {
+    return {
+      error
+    }
+  }
+
+  componentDidCatch(error, info) {
+    console.log(info.componentStack);
+    // api call
+  }
 
   render() {
     console.log("Render Test");
-    const { name, count } = this.state;
+    const { name, count, error } = this.state;
     return (
       <div>
-        {count < 5 && <App name={name} />}
+        {error ? <div>{error.message}</div> : <App name={name} />}
         <Child name={name} />
         <button type='button' onClick={() => {
             this.setState({name: "Rohit"})

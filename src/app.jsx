@@ -74,6 +74,7 @@ export default class App extends PureComponent {
 
   changeGreet() {
     this.setState({greet: 'Mr. Virat'})
+    
   }
 
 
@@ -97,17 +98,25 @@ export default class App extends PureComponent {
     }
    }
 
+   changeCount = () => {
+    // throw new Error("something went wrong...")
+    this.setState(({ count }) => ({ count: count + 1}))
+   }
+
   render() {
     console.log("Render app");
     const { greet, count } = this.state
+
+    if(count > 5) {
+      throw new Error("something went wrong...")
+    }
+
     return (
       <div>
         <h1>{greet}</h1>
         <h2>{count}</h2>
         <button type='button' onClick={this.changeGreet}>Chnage greet message</button>
-        <button type='button' onClick={() => {
-          this.setState(({ count }) => ({ count: count + 1}))
-        }}>Change Count</button>
+        <button type='button' onClick={this.changeCount}>Change Count</button>
       </div>
     )
   }
