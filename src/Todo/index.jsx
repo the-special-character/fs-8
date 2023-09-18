@@ -1,56 +1,139 @@
-import React, { Component, createRef } from 'react'
+import React, { Component, createRef } from 'react';
+import TodoForm from './todoForm';
+import TodoList from './todoList';
+import TodoFilter from './todoFilter';
+import Test from './test';
 
 export default class Todo extends Component {
-    state = {
-        todoList: []
-    }
+  state = {
+    todoList: [],
+    filterType: 'all',
+  };
 
-    inputRef = createRef();
+  data = [];
 
+  inputRef = createRef();
 
-    addTodo = (event) => {
-        event.preventDefault()
-        const todoText = this.inputRef.current;
-        this.setState(({ todoList }) => ({ 
-            todoList: [...todoList, {text:todoText.value, id: new Date().valueOf()}],
-         }), () => {
-            this.inputRef.current.value = "";
-         })
-    }
+  async componentDidMount() {
+    try {
+      const res = await fetch(
+        'http://localhost:3004/todoList',
+      );
+      const todoList = await res.json();
+      this.setState({ todoList });
+    } catch (error) {}
+  }
+
+  addTodo = async event => {
+    try {
+      event.preventDefault();
+      const todoText = this.inputRef.current;
+
+      const res = await fetch(
+        'http://localhost:3004/todoList',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            text: todoText.value,
+            isDone: false,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        },
+      );
+
+      const todoItem = await res.json();
+
+      this.setState(
+        ({ todoList }) => ({
+          todoList: [todoItem,...todoList, ],
+        }),
+        () => {
+          this.inputRef.current.value = '';
+        },
+      );
+    } catch (error) {}
+  };
+
+  toggleComplete = async item => {
+    try {
+      const res = await fetch(
+        `http://localhost:3004/todoList/${item.id}`,
+        {
+          method: 'PUT',
+          body: JSON.stringify({
+            ...item,
+            isDone: !item.isDone,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        },
+      );
+
+      const todoItem = await res.json();
+
+      this.setState(({ todoList }, props) => {
+        const i = todoList.findIndex(x => x.id === item.id);
+        return {
+          todoList: [
+            ...todoList.slice(0, i),
+            todoItem,
+            ...todoList.slice(i + 1),
+          ],
+        };
+      });
+    } catch (error) {}
+  };
+
+  deleteTodo = async item => {
+    try {
+      await fetch(
+        `http://localhost:3004/todoList/${item.id}`,
+        {
+          method: 'DELETE',
+        },
+      );
+    
+    this.setState(({ todoList }, props) => {
+      const i = todoList.findIndex(x => x.id === item.id);
+      return {
+        todoList: [
+          ...todoList.slice(0, i),
+          ...todoList.slice(i + 1),
+        ],
+      };
+    });
+  } catch (error) {
+      
+  }
+  };
+
+  filterTodo = filterType => {
+    this.setState({ filterType });
+  };
 
   render() {
-
-    console.log("render");
-    const {  todoList } = this.state
+    console.log('render');
 
     return (
-      <main className='flex flex-col items-center h-screen'>
+      <main className="flex flex-col items-center h-screen">
         <h1>Todo App</h1>
-        <form className='flex my-10' onSubmit={this.addTodo}>
-            <div>
-                <label htmlFor="todoText" className='sr-only'>Todo Text</label>
-                <input ref={this.inputRef} type="text" id='todoText' className='rounded-l-md' />
-            </div>
-            <button type="submit" className='btn rounded-l-none'>Add Todo</button>
-        </form>
-        <div className='todoList w-full flex-1'>
-            {todoList.map((item)  => <div key={item.id} className='todoItem flex items-center m-4'>
-                <div>
-                    <label htmlFor="isCompleted" className='sr-only'>Is Completed</label>
-                    <input type="checkbox" name="isCompleted" id="isCompleted" />
-                </div>
-                <p className='flex-1 mx-4 line-clamp-1'>{item.text}</p>
-                <button type="button" className='btn'>Delete</button>
-            </div>)}
-            
-           
-        </div>
-        <div className='filter w-full flex'>
-            <button type="button" className='btn rounded-none flex-1'>ALL</button>
-            <button type="button" className='btn rounded-none flex-1'>Pending</button>
-            <button type="button" className='btn rounded-none flex-1'>Completed</button>
-        </div>
+        <TodoForm
+          addTodo={this.addTodo}
+          ref={this.inputRef}
+          data={this.data}
+        />
+        <TodoList
+          toggleComplete={this.toggleComplete}
+          deleteTodo={this.deleteTodo}
+          {...this.state}
+        />
+        <TodoFilter filterTodo={this.filterTodo} />
       </main>
-    )
+    );
   }
 }

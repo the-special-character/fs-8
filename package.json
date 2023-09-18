@@ -10,7 +10,8 @@
     "start": "NODE_ENV=development webpack serve --config webpack.dev.js",
     "start:prod": "NODE_ENV=production webpack serve --config webpack.prod.js",
     "prettier": "prettier --write .",
-    "eslint": "eslint --fix ."
+    "eslint": "eslint --fix .",
+    "start:server": "json-server --watch db.json --port 3004"
   },
   "repository": {
     "type": "git",
@@ -56,6 +57,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.3",
+    "json-server": "^0.17.3",
     "postcss": "^8.4.24",
     "postcss-import": "^15.1.0",
     "postcss-loader": "^7.3.3",
