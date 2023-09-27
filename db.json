@@ -7,28 +7,13 @@
     },
     {
       "text": "asdfasdfadsf",
-      "isDone": true,
+      "isDone": false,
       "id": 8
     },
     {
-      "text": "asfasfasdf",
-      "isDone": true,
-      "id": 9
-    },
-    {
-      "text": "add todo",
-      "isDone": true,
-      "id": 10
-    },
-    {
-      "text": "sadfads",
-      "isDone": true,
-      "id": 11
-    },
-    {
-      "text": "asdfadsf",
-      "isDone": true,
-      "id": 12
+      "text": "asdfasdfas",
+      "isDone": false,
+      "id": 13
     }
   ]
 }
