@@ -1,6 +1,4 @@
 import React, { memo} from 'react';
-import ThemeContext from '../context/themeContext'
-import LocaleContext from '../context/localeContext';
 
 function TodoListItem({item, toggleComplete, deleteTodo}) {
     console.log("render todo Item");
@@ -21,16 +19,6 @@ function TodoListItem({item, toggleComplete, deleteTodo}) {
           onChange={() => toggleComplete(item)}
         />
       </div>
-      <ThemeContext.Consumer>
-        {(value) => {
-          console.log("consumer render");
-        return <p>{value.theme}</p>}}
-      </ThemeContext.Consumer>
-      <LocaleContext.Consumer>
-        {({locale}) => {
-          return <p>{locale}</p>
-        }}
-      </LocaleContext.Consumer>
       <p className="flex-1 mx-4 line-clamp-1">
         {item.text}
       </p>

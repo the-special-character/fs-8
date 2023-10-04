@@ -1,5 +1,4 @@
 import React, { forwardRef, memo } from 'react';
-import ThemeContext from '../context/themeContext';
 
 const TodoForm = forwardRef(({ addTodo }, ref) => {
   console.log('todo form');
@@ -19,13 +18,6 @@ const TodoForm = forwardRef(({ addTodo }, ref) => {
       <button type="submit" className="btn rounded-l-none">
         Add Todo
       </button>
-      <ThemeContext.Consumer>
-        {({ switchTheme }) => (
-          <button className="btn" type='button' onClick={switchTheme}>
-            Switch Theme
-          </button>
-        )}
-      </ThemeContext.Consumer>
     </form>
   );
 });

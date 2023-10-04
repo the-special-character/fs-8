@@ -16,7 +16,9 @@ const Todo = forwardRef(
       filterType,
     },
     ref,
-  ) => (
+  ) => {
+    console.log('render app');
+    return (
       <main className="flex flex-col items-center h-screen">
         <h1>Todo App</h1>
         <TodoForm addTodo={addTodo} ref={ref} />
@@ -30,7 +32,8 @@ const Todo = forwardRef(
           filterType={filterType}
         />
       </main>
-  ),
+    );
+  },
 );
 
 export default todoHOC(memo(Todo));

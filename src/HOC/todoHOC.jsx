@@ -1,40 +1,34 @@
 import React, {
   PureComponent,
   createRef,
-}  from 'react';
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 export default WrappedComponent => {
-  class HOCComponent extends PureComponent {
-    constructor(props) {
-      super(props);
-      this.state = {
-        todoList: [],
-        filterType: 'all',
-      };
+  function HOCComponent() {
+    const [todoList, setTodoList] = useState([]);
+    const [filterType, setFilterType] = useState('all');
+    const inputRef = useRef();
 
-      this.inputRef = createRef();
-    }
-
-    componentDidMount() {
-      this.loadTodoData();
-    }
-
-    loadTodoData = async (filterType = 'all') => {
+    const loadTodoData = async (ft = 'all') => {
       try {
         let url = 'http://localhost:3004/todoList';
-        if (filterType !== 'all') {
-          url += `?isDone=${filterType === 'completed'}`;
+        if (ft !== 'all') {
+          url += `?isDone=${ft === 'completed'}`;
         }
         const res = await fetch(url);
         const json = await res.json();
-        this.setState({ todoList: json, filterType });
+        setTodoList(json);
+        setFilterType(ft);
       } catch (error) {}
     };
 
-    addTodo = async event => {
+    const addTodo = async event => {
       try {
         event.preventDefault();
-        const todoText = this.inputRef.current;
+        const todoText = inputRef.current;
 
         const res = await fetch(
           'http://localhost:3004/todoList',
@@ -52,21 +46,11 @@ export default WrappedComponent => {
         );
 
         const todoItem = await res.json();
-
-        // this.loadTodoData();
-
-        this.setState(
-          ({ todoList }) => ({
-            todoList: [...todoList, todoItem],
-          }),
-          () => {
-            this.inputRef.current.value = '';
-          },
-        );
+        setTodoList(val => [...val, todoItem]);
       } catch (error) {}
     };
 
-    toggleComplete = async item => {
+    const toggleComplete = async item => {
       try {
         const res = await fetch(
           `http://localhost:3004/todoList/${item.id}`,
@@ -84,23 +68,18 @@ export default WrappedComponent => {
         );
 
         const todoItem = await res.json();
-
-        this.setState(({ todoList }) => {
-          const i = todoList.findIndex(
-            x => x.id === item.id,
-          );
-          return {
-            todoList: [
-              ...todoList.slice(0, i),
-              todoItem,
-              ...todoList.slice(i + 1),
-            ],
-          };
+        setTodoList(val => {
+          const i = val.findIndex(x => x.id === item.id);
+          return [
+            ...val.slice(0, i),
+            todoItem,
+            ...val.slice(i + 1),
+          ]
         });
       } catch (error) {}
     };
 
-    deleteTodo = async item => {
+    const deleteTodo = async (item) => {
       try {
         await fetch(
           `http://localhost:3004/todoList/${item.id}`,
@@ -109,25 +88,33 @@ export default WrappedComponent => {
           },
         );
 
-        this.setState(({ todoList }, props) => {
-          const i = todoList.findIndex(
-            x => x.id === item.id,
-          );
-          return {
-            todoList: [
-              ...todoList.slice(0, i),
-              ...todoList.slice(i + 1),
-            ],
-          };
+        setTodoList(val => {
+          const i = val.findIndex(x => x.id === item.id);
+          return [
+            ...val.slice(0, i),
+            ...val.slice(i + 1),
+          ]
         });
       } catch (error) {}
-    };
-
-    render() {
-      return <WrappedComponent loadTodoData={this.loadTodoData} addTodo={this.addTodo} toggleComplete={this.toggleComplete} deleteTodo={this.deleteTodo}  {...this.state} ref={this.inputRef} />;
     }
-  }
 
+    useEffect(() => {
+      loadTodoData();
+    }, []);
+
+    return (
+      <WrappedComponent
+        loadTodoData={loadTodoData}
+        addTodo={addTodo}
+        toggleComplete={toggleComplete}
+        deleteTodo={deleteTodo}
+        ref={inputRef}
+        todoList={todoList}
+        filterType={filterType}
+      />
+    );
+  }
+  
   HOCComponent.propTypes = {};
 
   return HOCComponent;
