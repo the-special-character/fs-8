@@ -2,13 +2,8 @@
   "todoList": [
     {
       "text": "asdfasdfadsf",
-      "isDone": false,
+      "isDone": true,
       "id": 8
-    },
-    {
-      "text": "asfasfasdf",
-      "isDone": false,
-      "id": 9
     },
     {
       "text": "add todo",
@@ -22,13 +17,38 @@
     },
     {
       "text": "asdfadsf",
-      "isDone": true,
+      "isDone": false,
       "id": 12
     },
     {
       "text": "asdfasd",
       "isDone": false,
       "id": 13
+    },
+    {
+      "text": "asdasdf",
+      "isDone": false,
+      "id": 14
+    },
+    {
+      "text": "asdfasf",
+      "isDone": false,
+      "id": 15
+    },
+    {
+      "text": "asdfadsf",
+      "isDone": false,
+      "id": 16
+    },
+    {
+      "text": "asdfasdf",
+      "isDone": false,
+      "id": 17
+    },
+    {
+      "text": "asdfasdf",
+      "isDone": false,
+      "id": 18
     }
   ]
 }

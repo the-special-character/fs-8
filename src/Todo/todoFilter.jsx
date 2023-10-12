@@ -1,7 +1,9 @@
 import React, { memo } from 'react';
 import clsx from 'clsx'
+import { useTodo } from '../context/todoContext';
 
-function TodoFilter({ filterTodo, filterType }) {
+function TodoFilter() {
+  const {loadTodo, filterType} = useTodo()
   return (
     <div className="filter w-full flex">
       <button
@@ -9,7 +11,7 @@ function TodoFilter({ filterTodo, filterType }) {
         className={clsx('btn rounded-none flex-1', {
           'bg-orange-400 hover:bg-orange-500': filterType === 'all'
         })}
-        onClick={() => filterTodo('all')}
+        onClick={() => loadTodo('all')}
       >
         ALL
       </button>
@@ -18,7 +20,7 @@ function TodoFilter({ filterTodo, filterType }) {
         className={clsx('btn rounded-none flex-1', {
           'bg-orange-400 hover:bg-orange-500': filterType === 'pending',
         })}
-        onClick={() => filterTodo('pending')}
+        onClick={() => loadTodo('pending')}
       >
         Pending
       </button>
@@ -27,7 +29,7 @@ function TodoFilter({ filterTodo, filterType }) {
         className={clsx('btn rounded-none flex-1', {
           'bg-orange-400 hover:bg-orange-500': filterType === 'completed',
         })}
-        onClick={() => filterTodo('completed')}
+        onClick={() => loadTodo('completed')}
       >
         Completed
       </button>

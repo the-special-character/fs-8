@@ -1,15 +1,30 @@
-import React, { forwardRef, memo } from 'react';
+import React, { memo, useRef } from 'react';
+import { useTodo } from '../context/todoContext';
 
-const TodoForm = forwardRef(({ addTodo }, ref) => {
-  console.log('todo form');
+function TodoForm() {
+  const todoTextRef = useRef(null);
+  const { addTodo } = useTodo()
   return (
-    <form className="flex my-10" onSubmit={addTodo}>
+    <form
+      className="flex my-10"
+      onSubmit={e => {
+        e.preventDefault();
+        const todoText = todoTextRef.current;
+        if (todoText) {
+          addTodo({
+            text: todoText.value,
+            isDone: false,
+          });
+          todoText.value = ""
+        }
+      }}
+    >
       <div>
         <label htmlFor="todoText" className="sr-only">
           Todo Text
         </label>
         <input
-          ref={ref}
+          ref={todoTextRef}
           type="text"
           id="todoText"
           className="rounded-l-md"
@@ -20,7 +35,7 @@ const TodoForm = forwardRef(({ addTodo }, ref) => {
       </button>
     </form>
   );
-});
+}
 
 TodoForm.displayName = 'TodoForm';
 

@@ -1,6 +1,5 @@
 import React, {
-  PureComponent,
-  createRef,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -10,22 +9,42 @@ export default WrappedComponent => {
   function HOCComponent() {
     const [todoList, setTodoList] = useState([]);
     const [filterType, setFilterType] = useState('all');
+    // const [loading, setLoading] = useState(false)
     const inputRef = useRef();
+    const loadingDialogRef = useRef()
+    const errorDialogRef = useRef()
+    const intervalRef = useRef()
 
-    const loadTodoData = async (ft = 'all') => {
+    const hideAfterInterval = useCallback(() => {
+      intervalRef.current = setInterval(() => { 
+        errorDialogRef.current.close();
+       }, 5000)
+    }, [])
+
+
+    const loadTodoData = useCallback(async (ft = 'all') => {
+      // setLoading(true)
       try {
+        loadingDialogRef.current.showModal();
         let url = 'http://localhost:3004/todoList';
         if (ft !== 'all') {
           url += `?isDone=${ft === 'completed'}`;
         }
+        // throw new Error("somethig went wrong...")
         const res = await fetch(url);
         const json = await res.json();
         setTodoList(json);
         setFilterType(ft);
-      } catch (error) {}
-    };
+      } catch (error) {
+        errorDialogRef.current.innerHTML = error.message
+        errorDialogRef.current.showModal();
+        hideAfterInterval();
+      } finally {
+        loadingDialogRef.current.close();
+      }
+    }, []);
 
-    const addTodo = async event => {
+    const addTodo = useCallback(async event => {
       try {
         event.preventDefault();
         const todoText = inputRef.current;
@@ -48,9 +67,9 @@ export default WrappedComponent => {
         const todoItem = await res.json();
         setTodoList(val => [...val, todoItem]);
       } catch (error) {}
-    };
+    }, []);
 
-    const toggleComplete = async item => {
+    const toggleComplete = useCallback(async item => {
       try {
         const res = await fetch(
           `http://localhost:3004/todoList/${item.id}`,
@@ -77,9 +96,9 @@ export default WrappedComponent => {
           ]
         });
       } catch (error) {}
-    };
+    }, []);
 
-    const deleteTodo = async (item) => {
+    const deleteTodo = useCallback(async (item) => {
       try {
         await fetch(
           `http://localhost:3004/todoList/${item.id}`,
@@ -96,11 +115,18 @@ export default WrappedComponent => {
           ]
         });
       } catch (error) {}
-    }
+    }, [])
 
+    
     useEffect(() => {
       loadTodoData();
-    }, []);
+
+      return () => {
+        if(intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+      }
+    }, [loadTodoData]);
 
     return (
       <WrappedComponent
@@ -111,6 +137,8 @@ export default WrappedComponent => {
         ref={inputRef}
         todoList={todoList}
         filterType={filterType}
+        loadingDialogRef={loadingDialogRef}
+        errorDialogRef={errorDialogRef}
       />
     );
   }

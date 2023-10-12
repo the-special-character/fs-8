@@ -16,7 +16,7 @@ function TodoListItem({item, toggleComplete, deleteTodo}) {
           name="isCompleted"
           id="isCompleted"
           checked={item.isDone}
-          onChange={() => toggleComplete(item)}
+          onChange={() => toggleComplete({...item, isDone: !item.isDone})}
         />
       </div>
       <p className="flex-1 mx-4 line-clamp-1">

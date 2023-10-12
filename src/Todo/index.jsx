@@ -1,39 +1,46 @@
-import React, { forwardRef, memo } from 'react';
+import React, { forwardRef, memo, useContext, useRef } from 'react';
 import TodoForm from './todoForm';
 import TodoList from './todoList';
 import TodoFilter from './todoFilter';
-import todoHOC from '../HOC/todoHOC';
-import { ThemeProvider } from '../context/themeContext';
+import { useTodo } from '../context/todoContext';
 
-const Todo = forwardRef(
-  (
-    {
-      loadTodoData,
-      addTodo,
-      toggleComplete,
-      deleteTodo,
-      todoList,
-      filterType,
-    },
-    ref,
-  ) => {
-    console.log('render app');
-    return (
-      <main className="flex flex-col items-center h-screen">
-        <h1>Todo App</h1>
-        <TodoForm addTodo={addTodo} ref={ref} />
-        <TodoList
-          toggleComplete={toggleComplete}
-          deleteTodo={deleteTodo}
-          todoList={todoList}
-        />
-        <TodoFilter
-          filterTodo={loadTodoData}
-          filterType={filterType}
-        />
-      </main>
-    );
-  },
-);
+function Todo() {
 
-export default todoHOC(memo(Todo));
+  const {
+    todoList,
+    filterType,
+    addTodo,
+    loadTodo,
+    updateTodo,
+    deleteTodo
+  } = useTodo()
+
+
+  return (
+    <main className="flex flex-col items-center h-screen">
+      {/* <dialog
+        className="backdrop:bg-gray-50/50"
+        ref={loadingDialogRef}
+      >
+        <h1>loading...</h1>
+      </dialog>
+      <dialog
+        className="backdrop:bg-gray-50/50"
+        ref={errorDialogRef}
+      ></dialog> */}
+      <h1>Todo App</h1>
+      <TodoForm />
+      <TodoList
+        toggleComplete={updateTodo}
+        deleteTodo={deleteTodo}
+        todoList={todoList}
+      />
+      <TodoFilter
+        filterTodo={loadTodo}
+        filterType={filterType}
+      />
+    </main>
+  );
+}
+
+export default memo(Todo);
