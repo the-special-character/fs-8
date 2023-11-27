@@ -37,6 +37,7 @@ module.exports = {
   ],
   devServer: {
     port: 3000,
+    historyApiFallback: true,
     // open: true,
     static: {
       directory: path.join(__dirname, 'assets'),
