@@ -11,7 +11,7 @@
     "start:prod": "NODE_ENV=production webpack serve --config webpack.prod.js",
     "prettier": "prettier --write .",
     "eslint": "eslint --fix .",
-    "start:server": "json-server --watch db.json --port 3004"
+    "start:server": "json-server --watch db.json -m ./node_modules/json-server-auth --port 3004"
   },
   "repository": {
     "type": "git",
@@ -59,6 +59,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.3",
     "json-server": "^0.17.3",
+    "json-server-auth": "^2.1.0",
     "postcss": "^8.4.24",
     "postcss-import": "^15.1.0",
     "postcss-loader": "^7.3.3",
