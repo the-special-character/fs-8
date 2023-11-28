@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/the-special-character/fs-8#readme",
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "bootstrap": "^5.3.0",
     "clsx": "^2.0.0",
     "react": "^18.2.0",
