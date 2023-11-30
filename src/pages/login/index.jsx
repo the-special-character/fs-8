@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import Input from '../../components/Input';
-import Button from '../../components/button';
 import CustomForm from '../../components/customForm';
+import { useAuth } from '../../context/authContext';
 
 const wait = time =>
   new Promise(resolve => {
@@ -12,19 +11,7 @@ const wait = time =>
 
 const fields = [
   {
-    label: 'Name',
-    id: 'name',
-    type: 'text',
-    autoComplete: 'name',
-    name: 'name',
-    rules: {
-      required: {
-        value: true,
-        message: 'Name is required...',
-      },
-    },
-  },
-  {
+    field: Input,
     label: 'Email address',
     id: 'email',
     type: 'email',
@@ -38,6 +25,7 @@ const fields = [
     },
   },
   {
+    field: Input,
     label: 'Password',
     id: 'password',
     type: 'password',
@@ -53,18 +41,11 @@ const fields = [
 ];
 
 export default function Example() {
-  
-
-  const onSubmit = async data => {
-    await wait(3000);
-    console.log(data);
-    
-  };
+  const { login } = useAuth();
 
   return (
     <>
-      <CustomForm onSubmit={onSubmit} fields={fields} />
-
+      <CustomForm onSubmit={login} fields={fields} />
       <p className="mt-10 text-center text-sm text-gray-500">
         Not a member?{' '}
         <Link

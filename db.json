@@ -50,5 +50,21 @@
       "isDone": false,
       "id": 18
     }
+  ],
+  "users": [
+    {
+      "email": "yagnesh.modh@gmail.com",
+      "password": "$2a$10$9VBcQKFllTL/MK6Ta8EH6OfYsqEgOCeQ4jtgNCQIQqhhwMfA5/soq",
+      "name": "Yagnesh Modh",
+      "role": "admin",
+      "id": 1
+    },
+    {
+      "email": "test@test.com",
+      "password": "$2a$10$vmzC.1SEEdiEcRfpu9TFUuq5lSyM45KVTOaltQhU.e5olPhtzxLoe",
+      "name": "YAGNESH MODH",
+      "role": "admin",
+      "id": 2
+    }
   ]
 }

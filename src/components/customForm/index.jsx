@@ -10,6 +10,7 @@ function CustomForm({ onSubmit, fields }) {
   } = useForm({
     mode: 'all',
   });
+
   return (
     <form
       className="space-y-6"

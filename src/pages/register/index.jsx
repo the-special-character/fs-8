@@ -1,8 +1,8 @@
 import React from 'react';
 import Input from '../../components/Input';
-import Button from '../../components/button';
 import CustomForm from '../../components/customForm';
 import RadioButtons from '../../components/radioButtons';
+import { useAuth } from '../../context/authContext';
 
 const fields = [
   {
@@ -63,27 +63,15 @@ const fields = [
   },
   {
     field: RadioButtons,
-    type: 'password',
-    autoComplete: 'new-password',
-    name: 'subsription',
+    name: 'role',
     options: [
       {
-        name: 'Startup',
-        ram: '12GB',
-        cpus: '6 CPUs',
-        disk: '160 GB SSD disk',
+        value: 'admin',
+        text: "Admin"
       },
       {
-        name: 'Business',
-        ram: '16GB',
-        cpus: '8 CPUs',
-        disk: '512 GB SSD disk',
-      },
-      {
-        name: 'Enterprise',
-        ram: '32GB',
-        cpus: '12 CPUs',
-        disk: '1024 GB SSD disk',
+        value: 'user',
+        text: "User"
       },
     ],
     rules: {
@@ -96,12 +84,10 @@ const fields = [
 ];
 
 function Register() {
-  const onSubmit = data => {
-    console.log(data);
-    
-  };
+  const { register } = useAuth()
+
   return (
-    <CustomForm onSubmit={onSubmit} fields={fields} />
+    <CustomForm onSubmit={register} fields={fields} />
   );
 }
 

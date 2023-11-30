@@ -43,8 +43,8 @@ function RadioButtons({name, control, rules, options}) {
       <div className="space-y-2">
         {options.map(plan => (
           <RadioGroup.Option
-            key={plan.name}
-            value={plan}
+            key={plan.value}
+            value={plan.value}
             className={({ active, checked }) =>
               `${
                 active
@@ -71,24 +71,9 @@ function RadioButtons({name, control, rules, options}) {
                           : 'text-gray-900'
                       }`}
                     >
-                      {plan.name}
+                      {plan.text}
                     </RadioGroup.Label>
-                    <RadioGroup.Description
-                      as="span"
-                      className={`inline ${
-                        checked
-                          ? 'text-sky-100'
-                          : 'text-gray-500'
-                      }`}
-                    >
-                      <span>
-                        {plan.ram}/{plan.cpus}
-                      </span>{' '}
-                      <span aria-hidden="true">
-                        &middot;
-                      </span>{' '}
-                      <span>{plan.disk}</span>
-                    </RadioGroup.Description>
+                    
                   </div>
                 </div>
                 {checked && (
