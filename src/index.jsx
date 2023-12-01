@@ -9,11 +9,23 @@ import Login from './pages/login';
 import Register from './pages/register';
 import AuthLayout from './layout/authLayout';
 import { AuthProvider } from './context/authContext';
+import MainLayout from './layout/mainLayout';
+import Home from './pages/home';
 
 const container = document.getElementById('app');
 const root = createRoot(container);
 
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />
+      }
+    ]
+  },
   {
     path: '/auth',
     element: <AuthLayout />,
