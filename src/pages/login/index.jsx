@@ -45,7 +45,10 @@ export default function Example() {
 
   return (
     <>
-      <CustomForm onSubmit={login} fields={fields} />
+      <CustomForm onSubmit={login} fields={fields} defaultValues={{
+        email: '',
+        password: ''
+      }} />
       <p className="mt-10 text-center text-sm text-gray-500">
         Not a member?{' '}
         <Link

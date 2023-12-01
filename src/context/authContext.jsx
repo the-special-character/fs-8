@@ -9,12 +9,13 @@ import ai from '../lib/axiosInstance'
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const login = useCallback(async (value) => {
+  const login = useCallback(async (value, setError) => {
+    
     try {
         const res = await ai.post("login", value);
         console.log(res.data);
     } catch (error) {
-        console.log(error.response.data);
+        setError('serverError',  { type: 'server', message: error.response.data })
     }
   }, []);
 
